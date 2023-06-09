@@ -1,0 +1,108 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: beige;
+    }
+    main{
+        padding: 1rem;
+    }
+    .main-header{
+        width:100%;
+        height:3.5rem;
+        background-color: #eda426;
+        padding: 0 1.5rem;
+        text-align: center;
+    }
+    .booking-form{
+        width: 20%;
+        max-width: 90%;
+        margin: auto;
+    }
+  
+    .form-control{
+        margin: 1rem 0;
+    }
+  
+    .form-control label,
+    .form-control input{
+        display: block;
+        width: 100%;
+    }
+  
+    .form-control input{
+        border: 1px solid #f3bf12;
+        font: inherit;
+        border-radius: 2px;
+    }
+    .container{
+        text-align: center;
+    }
+    button{
+        font: inherit;
+        border: 1px solid #080211;
+        color: black;
+        background: #e5e4a1;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .btn{
+        float: c;
+    }
+    .btn:hover,
+    .btn:active,
+    .btn:active{
+        color: #060aed;
+    }
+    .deletebtn{
+        font: inherit;
+        border: 1px solid black;
+        color:black;
+        background: #eba4a2;
+        border-radius: 3px;
+        cursor: pointer;
+        float:right;
+    }
+    .deletebtn:hover,
+    .deletebtn:active,
+    .deletebtn:active{
+        color: #f70a0a;
+    }
+    .editbtn{
+        font: inherit;
+        border: 1px solid black;
+        color:black;
+        background: #a6c0e5;
+        border-radius: 3px;
+        cursor: pointer;
+        float:right;
+    }
+    .editbtn:hover,
+    .editbtn:active,
+    .editbtn:active{
+        color: #073af3;
+    }
+    .list{
+        text-align: center;
+    }
+    .ul-list{
+        display: inline-block;
+        text-align: left;
+    }
+    ul{
+        list-style-type: none;
+        margin-top: none;
+        margin: 10;
+        padding: 10;
+    }
+    .list-item{
+        font: inherit;
+        border: 0.5px solid black;
+        margin:0.5rem;
+        background: #d7dbe1;
+    }
+    .list-item:hover,
+    .list-item:active,
+    .list-item:active{
+        color: #290303;
+    }
