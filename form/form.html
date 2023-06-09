@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Booking Appointment App</title>
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>Booking Appointment App</h1>
+    </header>
+          <main>
+                <form action="/admin/add-user" method="POST" class="booking-form" id="my-form">
+                  <div class="form-control">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name">
+                  </div>
+                  <div class="form-control">
+                    <label for="email">Email:</label>
+                    <input type="text"  name="email" id="email">
+                  </div>
+                  <div class="form-control">
+                    <label for="number">Phone Number:</label>
+                    <input type="number"  name="number" id="number">
+                  </div>
+                  <div class="container">
+                    <button class="btn" type="submit">Submit</button>
+                  </div> 
+                </form>
+                <div class="list">
+                  <ul id="user-List" class="ul-list"></ul>
+                </div>
+          </main>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+              <script>
+                const myForm = document.querySelector('#my-form');
+                const myName = document.querySelector('#name');
+                const myEmail = document.querySelector('#email');
+                const myNumber = document.querySelector('#number');
+                const userList = document.querySelector('#user-List');
+        
+                myForm.addEventListener('submit', onSubmit);
+        
+                function onSubmit(e) {
+                    e.preventDefault();
+        
+                        const userName=myName.value;
+                        const userEmail=myEmail.value;
+                        const userNumber=myNumber.value;
+                        const orderInput={
+                            userEmail,
+                            userName,
+                            userNumber
+                        };
+                        console.log(orderInput)
+                        axios.post('http://localhost:3000/user/add-user',orderInput)
+                            .then((response)=>{
+                                console.log("response");
+                                showOrder(response.data.newUserDetails);
+                            })
+                            .catch((err)=>{
+                                console.log("error");
+                            })
+        
+                        myName.value = '';
+                        myEmail.value='';
+                        myNumber.value = '';
+                }
+        
+                window.addEventListener("DOMContentLoaded",()=>{
+                    axios.get("http://localhost:3000/user/get-user")
+                        .then((response)=>{
+                          
+                            for(let i=0;i<response.data.allUsers.length;i++)
+                            {
+                                showOrder(response.data.allUsers[i])
+                            }
+                            console.log(response);
+                        })
+                        .catch((err)=>{
+                            console.error(err)
+                        });
+                    })
+        
+                function showOrder(obj){
+
+                    let childitem=document.createElement("li");
+                    childitem.className="list-item";
+        
+                    let deleteitem =document.createElement("button");
+                    deleteitem.type="submit";
+                    deleteitem.className="deletebtn";
+                    deleteitem.textContent="Delete";
+
+                    let edititem =document.createElement("button");
+                    edititem.type="submit";
+                    edititem.className="editbtn";
+                    edititem.textContent="Edit";
+        
+                    let parentitem=document.getElementById("user-List");
+                    childitem.textContent="Name:-"+obj.name+" & Email:- "+obj.email;
+                    console.log(obj);
+                    deleteitem.onclick=()=>{
+                    axios.delete(`http://localhost:3000/user/delete-user/${obj.id}`)
+                    .then((response)=>{
+                        console.log(response);
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    });
+                    parentitem.removeChild(childitem);
+                    }
+                    edititem.onclick=()=>{
+                    axios.put(`http://localhost:3000/user/edit-user/${obj.id}`)
+                    .then((response)=>{
+                        console.log(response);
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    });
+                    parentitem.removeChild(childitem);
+                    document.getElementById("name").value=obj.name;
+                    document.getElementById("email").value=obj.email;
+                    document.getElementById("number").value=obj.number; 
+                    }
+                    childitem.appendChild(deleteitem);
+                    childitem.appendChild(edititem);
+                    parentitem.appendChild(childitem);
+                }
+            </script>
+  </body>
+</html>
+
+
+
+
+
+
+  
